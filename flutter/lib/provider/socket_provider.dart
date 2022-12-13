@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketProvider extends ChangeNotifier {
-  IO.Socket? socket;
+  static IO.Socket? socket;
   final StreamSocket _streamSocket = StreamSocket();
 
   final List<dynamic> logs = [];
