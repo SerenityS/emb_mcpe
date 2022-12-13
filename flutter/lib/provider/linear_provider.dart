@@ -29,7 +29,7 @@ class LinearProvider extends ChangeNotifier {
               'action',
               {
                 'name': wsName,
-                'action': 'Jump',
+                'action': 'Swing',
               },
             );
             debugPrint("Swing Detected.");
