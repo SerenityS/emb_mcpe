@@ -31,21 +31,21 @@ class MainScreen extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(top: 16.0)),
               Consumer<AccelProvider>(builder: (context, provider, child) {
                 return Text(
-                  "X = ${_accelProvider.accelData.x.toStringAsFixed(1)}",
+                  "X = ${_accelProvider.sensorData.x.toStringAsFixed(1)}",
                   textAlign: TextAlign.center,
                 );
               }),
               const Padding(padding: EdgeInsets.only(top: 16.0)),
               Consumer<AccelProvider>(builder: (context, provider, child) {
                 return Text(
-                  "Y = ${_accelProvider.accelData.y.toStringAsFixed(1)}",
+                  "Y = ${_accelProvider.sensorData.y.toStringAsFixed(1)}",
                   textAlign: TextAlign.center,
                 );
               }),
               const Padding(padding: EdgeInsets.only(top: 16.0)),
               Consumer<AccelProvider>(builder: (context, provider, child) {
                 return Text(
-                  "Z = ${_accelProvider.accelData.z.toStringAsFixed(1)}",
+                  "Z = ${_accelProvider.sensorData.z.toStringAsFixed(1)}",
                   textAlign: TextAlign.center,
                 );
               }),

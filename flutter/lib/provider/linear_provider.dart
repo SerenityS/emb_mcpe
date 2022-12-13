@@ -8,6 +8,9 @@ class LinearProvider extends ChangeNotifier {
   Sensor sensorData = Sensor(0.0, 0.0, 0.0);
   StreamSubscription? _linearSubscription;
 
+  bool _isDetected = false;
+  int _threshold = 0;
+
   Future<void> startLinear() async {
     if (_linearSubscription != null) return;
 
@@ -18,9 +21,21 @@ class LinearProvider extends ChangeNotifier {
     _linearSubscription = stream.listen(
       (sensorEvent) {
         sensorData = Sensor(sensorEvent.data[0], sensorEvent.data[1], sensorEvent.data[2]);
-        if (sensorData.x > 40) {
-          // TODO: Implement Socket emit
-          debugPrint("Swing Detected.");
+        if (!_isDetected) {
+          if (sensorData.x > 40) {
+            // TODO: Implement Socket emit
+            debugPrint("Swing Detected.");
+            _isDetected = true;
+          } else if (sensorData.x > 15 && sensorData.y.abs() < 30) {
+            debugPrint("Jump Detected.");
+            _isDetected = true;
+          }
+        } else {
+          _threshold++;
+          if (_threshold == 5) {
+            _isDetected = false;
+            _threshold = 0;
+          }
         }
         notifyListeners();
       },
