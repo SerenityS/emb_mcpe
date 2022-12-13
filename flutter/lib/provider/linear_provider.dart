@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:emb_motion/constant.dart';
 import 'package:emb_motion/model/sensor_model.dart';
 import 'package:emb_motion/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,8 @@ class LinearProvider extends ChangeNotifier {
             SocketProvider.socket!.emit(
               'action',
               {
-                'name': 'qwertycvb',
-                'action': 'Swing',
+                'name': wsName,
+                'action': 'Jump',
               },
             );
             debugPrint("Swing Detected.");
@@ -37,7 +38,7 @@ class LinearProvider extends ChangeNotifier {
             SocketProvider.socket!.emit(
               'action',
               {
-                'name': 'qwertycvb',
+                'name': wsName,
                 'action': 'Jump',
               },
             );

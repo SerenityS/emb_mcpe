@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:emb_motion/constant.dart';
 import 'package:emb_motion/model/sensor_model.dart';
 import 'package:emb_motion/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class AccelProvider extends ChangeNotifier {
             SocketProvider.socket!.emit(
               'action',
               {
-                'name': 'qwertycvb',
+                'name': wsName,
                 'action': 'Step',
               },
             );

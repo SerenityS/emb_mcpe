@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (BuildContext context) => AccelProvider()),
         ChangeNotifierProvider(create: (BuildContext context) => CompassProvider()),
         ChangeNotifierProvider(create: (BuildContext context) => LinearProvider()),
-        ChangeNotifierProvider(create: (BuildContext context) => SocketProvider(name: "qwertycvb")),
+        ChangeNotifierProvider(create: (BuildContext context) => SocketProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

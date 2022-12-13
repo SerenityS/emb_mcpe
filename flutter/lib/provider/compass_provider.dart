@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:emb_motion/constant.dart';
 import 'package:emb_motion/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
@@ -36,7 +37,7 @@ class CompassProvider extends ChangeNotifier {
           SocketProvider.socket!.emit(
             'action',
             {
-              'name': 'qwertycvb',
+              'name': wsName,
               'action': position,
             },
           );

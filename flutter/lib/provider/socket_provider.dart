@@ -10,7 +10,7 @@ class SocketProvider extends ChangeNotifier {
 
   final List<dynamic> logs = [];
 
-  SocketProvider({required name}) {
+  SocketProvider() {
     socket = IO.io(wsUrl, IO.OptionBuilder().setTransports(['websocket']).build());
 
     socket!.onConnect(
@@ -18,7 +18,7 @@ class SocketProvider extends ChangeNotifier {
         socket!.emit(
           'join',
           {
-            'name': name,
+            'name': wsName,
           },
         );
       },
