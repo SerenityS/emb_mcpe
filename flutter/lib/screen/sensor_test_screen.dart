@@ -18,6 +18,7 @@ class SensorTestScreen extends StatelessWidget {
     _linearProvider = Provider.of<LinearProvider>(context);
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
           "Acceleration Sensor Test",

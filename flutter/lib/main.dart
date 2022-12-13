@@ -1,3 +1,4 @@
+import 'package:emb_motion/provider/bottom_navigation_provider.dart';
 import 'package:emb_motion/provider/compass_provider.dart';
 import 'package:emb_motion/provider/linear_provider.dart';
 import 'package:emb_motion/provider/accel_provider.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (BuildContext context) => BottomNavigationProvider()),
         ChangeNotifierProvider(create: (BuildContext context) => AccelProvider()),
         ChangeNotifierProvider(create: (BuildContext context) => CompassProvider()),
         ChangeNotifierProvider(create: (BuildContext context) => LinearProvider()),
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           useMaterial3: true,
         ),
-        home: const MainScreen(),
+        home: MainScreen(),
       ),
     );
   }
