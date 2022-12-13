@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:emb_motion/model/sensor_model.dart';
+import 'package:emb_motion/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sensors/flutter_sensors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +32,13 @@ class AccelProvider extends ChangeNotifier {
         _exactDistance = calculateMagnitude(sensorData.x, sensorData.y, sensorData.z);
         if (!_isDetected) {
           if (_exactDistance > 6) {
-            // TODO: Implement Socket emit
+            SocketProvider.socket!.emit(
+              'action',
+              {
+                'name': 'qwertycvb',
+                'action': 'Step',
+              },
+            );
             debugPrint("Step Detected.");
             _isDetected = true;
           }

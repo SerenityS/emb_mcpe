@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:emb_motion/model/sensor_model.dart';
+import 'package:emb_motion/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sensors/flutter_sensors.dart';
 
@@ -23,10 +24,23 @@ class LinearProvider extends ChangeNotifier {
         sensorData = Sensor(sensorEvent.data[0], sensorEvent.data[1], sensorEvent.data[2]);
         if (!_isDetected) {
           if (sensorData.x > 40) {
-            // TODO: Implement Socket emit
+            SocketProvider.socket!.emit(
+              'action',
+              {
+                'name': 'qwertycvb',
+                'action': 'Swing',
+              },
+            );
             debugPrint("Swing Detected.");
             _isDetected = true;
           } else if (sensorData.x > 15 && sensorData.y.abs() < 30) {
+            SocketProvider.socket!.emit(
+              'action',
+              {
+                'name': 'qwertycvb',
+                'action': 'Jump',
+              },
+            );
             debugPrint("Jump Detected.");
             _isDetected = true;
           }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:emb_motion/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 
@@ -21,7 +22,6 @@ class CompassProvider extends ChangeNotifier {
         double? direction = compassData.heading;
         angle = direction! * (math.pi / 180) * -1;
 
-        // TODO: Implement Socket emit
         if ((_prev - angle).abs() > 0.05) {
           if (_prev < angle) {
             position = "left";
@@ -32,6 +32,16 @@ class CompassProvider extends ChangeNotifier {
           position = "stay";
         }
         _prev = angle;
+        if (position != "stay") {
+          SocketProvider.socket!.emit(
+            'action',
+            {
+              'name': 'qwertycvb',
+              'action': position,
+            },
+          );
+        }
+        debugPrint("Rotate Detected.");
         notifyListeners();
       },
     );
