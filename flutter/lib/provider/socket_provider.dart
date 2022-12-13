@@ -1,14 +1,12 @@
-import 'dart:async';
-
 import 'package:emb_motion/constant.dart';
 import 'package:emb_motion/util/stream_socket.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketProvider extends ChangeNotifier {
   IO.Socket? socket;
   final StreamSocket _streamSocket = StreamSocket();
-  StreamSubscription? _socketSubscription;
 
   final List<dynamic> logs = [];
 
@@ -32,9 +30,10 @@ class SocketProvider extends ChangeNotifier {
 
     socket!.onDisconnect((data) {});
 
-    _socketSubscription = _streamSocket.getResponse.listen(
+    _streamSocket.getResponse.listen(
       (socketEvent) {
-        logs.add(socketEvent['msg']);
+        String timeStamp = DateFormat('yy-MM-dd kk:mm:ss').format(DateTime.now());
+        logs.add("[$timeStamp] ${socketEvent['msg']}");
         notifyListeners();
       },
     );
