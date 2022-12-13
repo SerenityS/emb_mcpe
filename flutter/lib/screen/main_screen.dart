@@ -22,6 +22,7 @@ class MainScreen extends StatelessWidget {
       body: Builder(
         builder: ((context) {
           return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
                 "Acceleration Sensor Test",
@@ -113,6 +114,9 @@ class MainScreen extends StatelessWidget {
                     child: const Text("Stop"),
                   ),
                 ],
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
               ),
               const Text(
                 "Compass Sensor Test",
