@@ -1,3 +1,4 @@
+import 'package:emb_motion/provider/compass_provider.dart';
 import 'package:emb_motion/provider/linear_provider.dart';
 import 'package:emb_motion/provider/accel_provider.dart';
 import 'package:emb_motion/screen/main_screen.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (BuildContext context) => AccelProvider()),
+        ChangeNotifierProvider(create: (BuildContext context) => CompassProvider()),
         ChangeNotifierProvider(create: (BuildContext context) => LinearProvider()),
       ],
       child: MaterialApp(
