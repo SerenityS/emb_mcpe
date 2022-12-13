@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:emb_motion/constant.dart';
 import 'package:emb_motion/util/stream_socket.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class SocketProvider {
+class SocketProvider extends ChangeNotifier {
   IO.Socket? socket;
   final StreamSocket _streamSocket = StreamSocket();
+  StreamSubscription? _socketSubscription;
+
+  final List<dynamic> logs = [];
 
   SocketProvider({required name}) {
     socket = IO.io(wsUrl, IO.OptionBuilder().setTransports(['websocket']).build());
@@ -25,6 +31,13 @@ class SocketProvider {
     });
 
     socket!.onDisconnect((data) {});
+
+    _socketSubscription = _streamSocket.getResponse.listen(
+      (socketEvent) {
+        logs.add(socketEvent['msg']);
+        notifyListeners();
+      },
+    );
   }
 
   void close() {
