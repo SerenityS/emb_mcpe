@@ -13,18 +13,31 @@ class LogScreen extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Consumer<SocketProvider>(builder: (context, provider, child) {
-        return SingleChildScrollView(
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: _socketProvider.logs.length,
-            itemBuilder: ((context, index) {
-              return Text(_socketProvider.logs[index]);
-            }),
+      child: Stack(
+        children: [
+          Consumer<SocketProvider>(builder: (context, provider, child) {
+            return SingleChildScrollView(
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: _socketProvider.logs.length,
+                itemBuilder: ((context, index) {
+                  return Text(_socketProvider.logs[index]);
+                }),
+              ),
+            );
+          }),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              child: const Icon(Icons.delete_forever_outlined),
+              onPressed: () {
+                _socketProvider.clearLogs();
+              },
+            ),
           ),
-        );
-      }),
+        ],
+      ),
     );
   }
 }

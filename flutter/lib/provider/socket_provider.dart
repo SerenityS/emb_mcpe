@@ -39,6 +39,11 @@ class SocketProvider extends ChangeNotifier {
     );
   }
 
+  void clearLogs() {
+    logs.clear();
+    notifyListeners();
+  }
+
   void close() {
     _streamSocket.dispose();
   }
