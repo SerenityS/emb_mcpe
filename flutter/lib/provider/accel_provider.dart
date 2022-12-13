@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sensors/flutter_sensors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StepProvider extends ChangeNotifier {
+class AccelProvider extends ChangeNotifier {
   Sensor accelData = Sensor(0.0, 0.0, 0.0);
   StreamSubscription? _accelSubscription;
 
@@ -15,7 +15,7 @@ class StepProvider extends ChangeNotifier {
 
   late SharedPreferences pref;
 
-  Future<void> startStep() async {
+  Future<void> startAccel() async {
     if (_accelSubscription != null) return;
 
     final stream = await SensorManager().sensorUpdates(
@@ -35,7 +35,7 @@ class StepProvider extends ChangeNotifier {
     );
   }
 
-  void stopStep() {
+  void stopAccel() {
     if (_accelSubscription == null) return;
     _accelSubscription?.cancel();
     _accelSubscription = null;

@@ -1,18 +1,18 @@
 import 'package:emb_motion/provider/linear_provider.dart';
-import 'package:emb_motion/provider/step_provider.dart';
+import 'package:emb_motion/provider/accel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
 
+  late AccelProvider _accelProvider;
   late LinearProvider _linearProvider;
-  late StepProvider _stepProvider;
 
   @override
   Widget build(BuildContext context) {
+    _accelProvider = Provider.of<AccelProvider>(context);
     _linearProvider = Provider.of<LinearProvider>(context);
-    _stepProvider = Provider.of<StepProvider>(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text("EMB4 MCPE Motion Control")),
@@ -25,23 +25,23 @@ class MainScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const Padding(padding: EdgeInsets.only(top: 16.0)),
-              Consumer<StepProvider>(builder: (context, provider, child) {
+              Consumer<AccelProvider>(builder: (context, provider, child) {
                 return Text(
-                  "X = ${_stepProvider.accelData.x.toStringAsFixed(1)}",
+                  "X = ${_accelProvider.accelData.x.toStringAsFixed(1)}",
                   textAlign: TextAlign.center,
                 );
               }),
               const Padding(padding: EdgeInsets.only(top: 16.0)),
-              Consumer<StepProvider>(builder: (context, provider, child) {
+              Consumer<AccelProvider>(builder: (context, provider, child) {
                 return Text(
-                  "Y = ${_stepProvider.accelData.y.toStringAsFixed(1)}",
+                  "Y = ${_accelProvider.accelData.y.toStringAsFixed(1)}",
                   textAlign: TextAlign.center,
                 );
               }),
               const Padding(padding: EdgeInsets.only(top: 16.0)),
-              Consumer<StepProvider>(builder: (context, provider, child) {
+              Consumer<AccelProvider>(builder: (context, provider, child) {
                 return Text(
-                  "Z = ${_stepProvider.accelData.z.toStringAsFixed(1)}",
+                  "Z = ${_accelProvider.accelData.z.toStringAsFixed(1)}",
                   textAlign: TextAlign.center,
                 );
               }),
@@ -51,7 +51,7 @@ class MainScreen extends StatelessWidget {
                 children: <Widget>[
                   MaterialButton(
                     color: Colors.green,
-                    onPressed: () => _stepProvider.startStep(),
+                    onPressed: () => _accelProvider.startAccel(),
                     child: const Text("Start"),
                   ),
                   const Padding(
@@ -59,7 +59,7 @@ class MainScreen extends StatelessWidget {
                   ),
                   MaterialButton(
                     color: Colors.red,
-                    onPressed: () => _stepProvider.stopStep(),
+                    onPressed: () => _accelProvider.stopAccel(),
                     child: const Text("Stop"),
                   ),
                 ],
