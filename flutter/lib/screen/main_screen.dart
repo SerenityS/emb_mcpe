@@ -37,7 +37,7 @@ class MainScreen extends StatelessWidget {
         BottomNavigationBarItem(icon: Icon(Icons.description_outlined), label: "Log"),
       ],
       currentIndex: _bottomNavigationProvider.currentPage,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: Colors.teal,
       onTap: (index) {
         _bottomNavigationProvider.updateCurrentPage(index);
       },
