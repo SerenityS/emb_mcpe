@@ -1,2 +1,2 @@
-const String wsUrl = "";
+String wsUrl = "";
 const String wsName = "";

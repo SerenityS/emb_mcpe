@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:emb_motion/constant.dart';
 import 'package:emb_motion/util/stream_socket.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +12,12 @@ class SocketProvider extends ChangeNotifier {
 
   final List<dynamic> logs = [];
 
-  SocketProvider() {
+  void clearLogs() {
+    logs.clear();
+    notifyListeners();
+  }
+
+  void connect() {
     socket = IO.io(wsUrl, IO.OptionBuilder().setTransports(['websocket']).build());
 
     socket!.onConnect(
@@ -37,11 +44,6 @@ class SocketProvider extends ChangeNotifier {
         notifyListeners();
       },
     );
-  }
-
-  void clearLogs() {
-    logs.clear();
-    notifyListeners();
   }
 
   void close() {
