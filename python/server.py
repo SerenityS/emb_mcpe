@@ -1,6 +1,8 @@
 from flask import Flask, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
+from controller import McpeController
+
 # Flask App Config
 app: Flask = Flask(__name__)
 
@@ -10,6 +12,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 # CORS_ALLOWED_ORIGINS is the list of origins authorized to make requests.
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+controller = McpeController()
 
 # Home
 @app.route("/", methods=["GET", "POST"])
@@ -37,6 +40,8 @@ def text(message):
     print(f"action detected : {action}")
 
     emit("message", {"msg": f"{action} detected."}, room=name)
+    
+    controller.runCmd(action)
 
 
 # RUN
